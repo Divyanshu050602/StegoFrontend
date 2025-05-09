@@ -107,109 +107,116 @@ function Encryption() {
   
 
   return (
-    <div className='bg-gray-900 text-white p-6 min-h-screen'>
-      <div className='container mx-auto'>
+    <div className="bg-gray-900 text-white p-6 min-h-screen">
+      <div className="max-w-4xl mx-auto">
 
         {/* Page heading */}
-        <h1 className='text-3xl font-bold text-center mb-6'>Encryption</h1>
+        <h1 className="text-3xl font-bold text-center mb-6">Encryption</h1>
 
         {/* File upload input */}
-        <input
-          id='uploadImage'
-          type='file'
-          className='block w-full p-2 mb-4 border rounded bg-white text-black'
-          onChange={(e) => setImage(e.target.files[0])}
-        />
+        <div className="space-y-4">
+          <input
+            id="uploadImage"
+            type="file"
+            className="w-full p-2 border rounded bg-white text-black"
+            onChange={(e) => setImage(e.target.files[0])}
+          />
+          
+          {/* Secret message input */}
+          <textarea
+            placeholder="Enter your secret message"
+            className="w-full p-2 border rounded bg-white text-black"
+            value={message}
+            onChange={(e) => setMessage(e.target.value)}
+          />
 
-        {/* Secret message input */}
-        <textarea
-          placeholder='Enter your secret message'
-          className='w-full p-2 border rounded mb-4 bg-white text-black'
-          value={message}
-          onChange={(e) => setMessage(e.target.value)}
-        />
+          {/* Keyword for encryption */}
+          <input
+            type="text"
+            placeholder="Enter Keyword"
+            className="w-full p-2 border rounded bg-white text-black"
+            value={keyword}
+            onChange={(e) => setKeyword(e.target.value)}
+          />
 
-        {/* Keyword for encryption */}
-        <input
-          type='text'
-          placeholder='Enter Keyword'
-          className='block w-full p-2 border rounded mb-4 bg-white text-black'
-          value={keyword}
-          onChange={(e) => setKeyword(e.target.value)}
-        />
+          {/* Recipient Email */}
+          <input
+            type="email"
+            placeholder="Recipient Email"
+            className="w-full p-2 border rounded bg-white text-black"
+            value={recipientEmail}
+            onChange={(e) => setRecipientEmail(e.target.value)}
+          />
 
-        {/* Recipient Email */}
-        <input
-          type='email'
-          placeholder='Recipient Email'
-          className='block w-full p-2 border rounded mb-4 bg-white text-black'
-          value={recipientEmail}
-          onChange={(e) => setRecipientEmail(e.target.value)}
-        />
+          {/* Sender Email */}
+          <input
+            type="email"
+            placeholder="Your Email"
+            className="w-full p-2 border rounded bg-white text-black"
+            value={senderEmail}
+            onChange={(e) => setSenderEmail(e.target.value)}
+          />
+        </div>
 
-        {/* Sender Email */}
-        <input
-          type='email'
-          placeholder='Your Email'
-          className='block w-full p-2 border rounded mb-4 bg-white text-black'
-          value={senderEmail}
-          onChange={(e) => setSenderEmail(e.target.value)}
-        />
-
-        {/* Timestamps for encryption access */}
-        <div className='flex gap-6 justify-center items-center m-4 p-2'>
+        {/* Timestamp Inputs */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 mt-6">
+          
           {/* Start Time */}
-          <div className='flex flex-col items-start'>
-            <label className='mb-1'>Start Time</label>
+          <div className="flex flex-col">
+            <label className="mb-1">Start Time</label>
             <input
-              type='datetime-local'
-              className='p-2 border rounded bg-white text-black'
+              type="datetime-local"
+              className="p-2 border rounded bg-white text-black"
               value={startTimestamp}
               onChange={(e) => setStartTimestamp(e.target.value)}
             />
           </div>
-
+          
           {/* End Time */}
-          <div className='flex flex-col items-start'>
-            <label className='mb-1'>End Time</label>
+          <div className="flex flex-col">
+            <label className="mb-1">End Time</label>
             <input
-              type='datetime-local'
-              className='p-2 border rounded bg-white text-black'
+              type="datetime-local"
+              className="p-2 border rounded bg-white text-black"
               value={endTimestamp}
               onChange={(e) => setEndTimestamp(e.target.value)}
             />
           </div>
         </div>
 
-        {/* Action Buttons */}
-        <div className='flex gap-3 flex-wrap'>
+        {/* Access Buttons */}
+        <div className="flex flex-col sm:flex-row gap-4 mt-6">
+
           {/* Button to generate tracking URL and send via email */}
           <button
-            className='bg-yellow-500 px-4 py-2 rounded mb-4'
-            onClick={handleGenerateAndSendEmail}>
+            className="bg-yellow-500 px-4 py-2 rounded"
+            onClick={handleGenerateAndSendEmail}
+          >
             Generate URL & Send Email
           </button>
 
           {/* Button to start image encryption */}
           <button
-            className='bg-blue-600 px-4 py-2 rounded mb-4'
+            className="bg-blue-600 px-4 py-2 rounded"
             onClick={handleEncryptImage}
-            disabled={loading}>
+            disabled={loading}
+          >
             {loading ? 'Encrypting...' : 'Encrypt Image'}
           </button>
         </div>
 
         {/* Display any error message */}
-        {error && <p className='text-red-500 mt-2'>{error}</p>}
+        {error && <p className="text-red-500 mt-4">{error}</p>}
 
         {/* Show download button after successful encryption */}
         {encryptedImageURL && (
-          <div className='mt-6 text-center'>
-            <p className='mb-2 text-green-400 font-medium'>✅ Encrypted image ready!</p>
+          <div className="mt-6 text-center">
+            <p className="mb-2 text-green-400 font-medium">✅ Encrypted image ready!</p>
             <a
               href={encryptedImageURL}
-              download='encrypted_image.png'
-              className='bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700 transition'>
+              download="encrypted_image.png"
+              className="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700 transition"
+            >
               Download PNG
             </a>
           </div>

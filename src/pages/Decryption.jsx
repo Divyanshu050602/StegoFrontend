@@ -115,43 +115,64 @@ const Decryption = () => {
   };
 
   return (
-    <div className='container mx-auto'>
-      <form onSubmit={handleDecrypt}>
-        <h1 className='text-3xl font-bold text-center mb-6 text-white'>Decryption</h1>
+    <div className='bg-gray-900 min-h-screen p-4 text-white'>
+      <div className='max-w-2xl mx-auto'>
+        <form onSubmit={handleDecrypt} className='space-y-6'>
+          <h1 className='text-3xl font-bold text-center'>Decryption</h1>
 
-        {/* 🔑 Input field for image URL (required) */}
-        <p className='text-2xl text-white'>Enter The Image URL that you want to decrypt</p>
-        <input type='text' placeholder='Enter Image URL'
-          value={imageURL} onChange={(e) => setImageURL(e.target.value)}
-          className='block w-full p-2 border rounded mb-4 text-black bg-white' required />
+          <div>
+            <label className='block text-lg mb-1'>Image URL</label>
+            <input
+              type='text'
+              placeholder='Enter Image URL'
+              value={imageURL}
+              onChange={(e) => setImageURL(e.target.value)}
+              className='w-full p-2 border rounded bg-white text-black'
+              required
+            />
+          </div>
 
-        {/* 📁 File input for keyword file (.txt only) */}
-        <p className='text-2xl text-white'>Enter The Comment Post for Comment Extraction. </p>
-        <input type='text' placeholder='Enter Url for comment Extraction'
-        value={CommentURL}
-          onChange={(e) => setCommentURL(e.target.value)}
-          className='block w-full p-2 mb-4 border rounded bg-white text-black' required />
+          <div>
+            <label className='block text-lg mb-1'>Comment Post URL</label>
+            <input
+              type='text'
+              placeholder='Enter URL for comment extraction'
+              value={CommentURL}
+              onChange={(e) => setCommentURL(e.target.value)}
+              className='w-full p-2 border rounded bg-white text-black'
+              required
+            />
+          </div>
 
-        {/* 📁 File input for keyword file (.txt only) */}
-        <p className='text-2xl text-white'>Enter The Keyword Text File for Decryption. <sup className='ml-2'>*</sup><i>.txt file accepted</i></p>
-        <input type='file' accept='.txt'
-          onChange={(e) => setKeywordFile(e.target.files[0])}
-          className='block w-full p-2 mb-4 border rounded bg-white text-black' required />
+          <div>
+            <label className='block text-lg mb-1'>
+              Keyword Text File <sup>*</sup> <i className='text-sm'>(.txt file only)</i>
+            </label>
+            <input
+              type='file'
+              accept='.txt'
+              onChange={(e) => setKeywordFile(e.target.files[0])}
+              className='w-full p-2 border rounded bg-white text-black'
+              required
+            />
+          </div>
 
-        {/* 🔓 Decrypt button */}
-        <button type='submit' className='px-4 py-2 rounded text-black bg-white'>Decrypt Image</button>
-      </form>
+          <button
+            type='submit'
+            className='w-full bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded transition'>
+            Decrypt Image
+          </button>
+        </form>
 
-      {/* ⌛ Show status like "Decrypting..." or error messages */}
-      {status && <p className="mt-4 text-white text-xl">{status}</p>}
+        {status && <p className='mt-6 text-center text-yellow-300 text-lg'>{status}</p>}
 
-      {/* 📬 Display decrypted message from backend */}
-      {decryptedMessage && (
-        <div className="mt-6 p-4 bg-green-200 text-black rounded-xl">
-          <h2 className="text-xl font-bold">Decrypted Message:</h2>
-          <p>{decryptedMessage}</p>
-        </div>
-      )}
+        {decryptedMessage && (
+          <div className='mt-6 p-4 bg-green-200 text-black rounded-xl'>
+            <h2 className='text-xl font-bold'>Decrypted Message:</h2>
+            <p>{decryptedMessage}</p>
+          </div>
+        )}
+      </div>
     </div>
   );
 };
